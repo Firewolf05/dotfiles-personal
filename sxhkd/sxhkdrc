@@ -1,0 +1,87 @@
+# ##############################################################################
+# #                                   KEYBINDS                                 #
+# ##############################################################################
+
+#flamehsot
+alt + s 
+    flameshot gui 
+
+#rofi
+super + space
+    rofi -modi window,drun,run -show drun -show-icons -icon-theme Papirus
+
+#change focus and move focused window
+super + {_,shift + }{Left,Down,Up,Right}
+    bspc node --{focus,swap} {west,south,north,east}
+
+# Kill the focused window
+super + q
+    bspc node -c
+
+#switch workspaces
+super + {1,2,3,4,5,6,7,8,9,0}
+	bspc desktop -f {1,2,3,4,5,6,7,8,9,10}
+
+# Move and send window to workspace #
+super + shift + {1-9,0}
+    bspc node -d {1-9,10} --follow 
+
+# Resize window
+super + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Set window state
+super + {d,f}
+    bspc node -t {tiled,fullscreen} 
+
+# Lock screen
+super + x
+    arcolinux-logout
+
+# Start kitty
+super + Return
+    kitty
+
+# Open browser
+super + F4
+    firefox
+
+#open discord 
+super + F3
+    discord-canary
+
+
+# Toggle notif center
+super + n
+    sh $HOME/.local/bin/notifcntr
+
+# Toggle network menu
+super + alt + n
+    sh $HOME/.local/bin/ntwkmgr
+
+# Toggle color picker
+super + p
+  bash ~/.local/bin/xcolor-pick
+
+# Manage volume
+XF86Audio{Raise,Lower}Volume
+    amixer -q set Master 5%{+,-}
+
+XF86AudioMute
+    amixer set Master toggle
+
+
+XF86AudioPlay
+    playerctl play-pause
+
+
+# Restart sxhkd
+#super + shift + r
+#    pkill -USR1 -x sxhkd
+
+# Quit and restart bspwm
+super + shift + r
+    bspc wm -r && pkill -USR1 -x sxhkd
